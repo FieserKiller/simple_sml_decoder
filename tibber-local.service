@@ -1,0 +1,15 @@
+[Unit]
+Description=Pumps local Tibber Pulse data to influxdb 
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python -u /root/tibber-pulse-local/decode_influx.py
+Type=exec
+Restart=always
+RestartSec=0
+StandardError=journal
+StandardOutput=journal
+StandardInput=null
+
+[Install]
+WantedBy=multi-user.target
