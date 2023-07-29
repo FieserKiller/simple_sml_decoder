@@ -1,9 +1,9 @@
 # Simple python SML decoder
 This is a very simple SML protocol decoder for smart meter.
-All it does is searching for total power used and current power usage byte fields and coverts them to integers.
+All it does is searching for total power used and current power usage byte fields and converts them to integers.
 
 It works with my meter: EasyMeter ESY Q3AA2054 V10.09
-For different meters youl need to check manual if byte langths, ordering or offsets are the same and twaek the script.
+For different meters you'll need to check manual if byte lengths, endian or offsets are the same and tweak the script accordingly.
 
 ## Files:
 decode.py - runs an infinite loop and outputs found values. 
@@ -26,6 +26,7 @@ decode_influx.py - does the same but outputs found values into a influxdb
 
 sml_dump1.example, sml_dump2.example - 2 files with raw SML data
 
+tibber-local.service - a systemd service file
 
 ## Installation
 You'll need python3, run the script and add missing dependencies.
