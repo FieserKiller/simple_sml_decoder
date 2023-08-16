@@ -34,7 +34,7 @@ while True:
             crc = crc_lookup[(byte ^ crc) & 0xff] ^ (crc >> 8 & 0xff)
         crc ^= 0xffff
         if crc & 0xff != data[-2] or crc >> 8 & 0xff != data[-1]:
-            print(str(datetime.datetime.now())+'CRC check failed')
+            print(str(datetime.datetime.now())+': CRC check failed')
             continue
     
     searchTotal = b'\x77\x07\x01\x00\x01\x08\x00\xff\x64'
