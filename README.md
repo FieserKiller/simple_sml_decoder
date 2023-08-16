@@ -47,5 +47,5 @@ To make your Tibber Pulse serve raw SML data you'll have to do some trickery fir
 - have fun monitoring your power usage!
 
 ## Changelog
-2023-08-16: Added systemd watchdog support to decode_influx.py and systemd service file. After 60 seconds without new data written service will restart
-2023-08-16: Added CRC check to SML data to prevent occasional bad readings. Can be turned off via do_crc_check variable in case your meter does not use CRC-16/X-25 or your readins are rock solid and you want to save some cpu cycles
+- 2023-08-16: Added systemd watchdog support to decode_influx.py and systemd service file. After 60 seconds without new data written service will restart
+- 2023-08-16: Added CRC check to SML data to prevent occasional bad readings. Can be turned off via do_crc_check variable in case your meter does not use CRC-16/X-25 or your readins are rock solid and you want to save some cpu cycles
