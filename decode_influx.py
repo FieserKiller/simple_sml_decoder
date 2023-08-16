@@ -5,6 +5,7 @@ import influxdb_client
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 from influxdb_client import Point
+import systemd_watchdog
 
 url = 'http://tibber-host/data.json?node_id=1'
 user = 'admin'
@@ -14,6 +15,8 @@ influx_user = 'tibberPulse'
 influx_password = 'tibberPulse'
 influx_bucket = 'tibberPulse'
 
+wd = systemd_watchdog.watchdog()
+wd.ready()
 influx_client = InfluxDBClient(url=influx_url,token=f'{influx_user}:{influx_password}',org="-")
 influx_write_api = influx_client.write_api(write_options=SYNCHRONOUS)
 data = None
@@ -42,8 +45,12 @@ while True:
         print(str(datetime.datetime.now())+': Malformed data found:'+str(len(data)))
         
     elif (total_int != prev_total or moment_int != prev_moment):
+        #print("total:"+str(total_int)+" moment:"+str(moment_int))
         p = Point("tibber").field("total", total_int).field("moment", moment_int)
         influx_write_api.write(bucket=influx_bucket, record=p)
         prev_moment = moment_int
         prev_total = total_int
+    
+    if wd.is_enabled:
+        wd.ping()
     time.sleep(2)
