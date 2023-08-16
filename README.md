@@ -44,4 +44,8 @@ To make your Tibber Pulse serve raw SML data you'll have to do some trickery fir
 - open 10.133.70.1 in your browser, username is admin and the password is the one you wrote down
 - look for the setting _webserver_force_enable_ and set it to true, click the button at the bottom of the page to save your changes and reboot the device
 - device will boot up normally and connect to your wifi but the web interface will still be enabled, and with it the possibility to query raw SML data which our script uses.
-- have fun monitoring your power usage! 
+- have fun monitoring your power usage!
+
+## Changelog
+2023-08-16: Added systemd watchdog support to decode_influx.py and systemd service file. After 60 seconds without new data written service will restart
+2023-08-16: Added CRC check to SML data to prevent occasional bad readings. Can be turned off via do_crc_check variable in case your meter does not use CRC-16/X-25 or your readins are rock solid and you want to save some cpu cycles
